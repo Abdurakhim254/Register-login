@@ -61,11 +61,15 @@
             margin-top: 10px;
             background-color:rgba(34, 112, 230, 0.719);
         }
-        button{
+        .btn{
             width: 100%;
+            border-radius: 10px;
+            height: 180%;
+            backdrop-filter: blur(20px);
             text-align: center;
             font-size: 18px;
-            color: #fff;
+            color: black;
+            background-color: rgba(34, 112, 230, 0.719);
         }
     </style>
 </head>
@@ -88,7 +92,7 @@
             <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Enter confirm password">
 
             <input type="submit" value="SIGN UP" class="sign_btn">
-            <button" onclick="Start">SIGN IN</a>
+            <button" onclick="Start()" class="btn">SIGN IN</button>
         </form>
     </div>
     <script>
@@ -131,8 +135,11 @@
             }catch (error) {
                 alert(error.message)
             }
-
+            
         })
+        function Start(){
+            window.open("http://localhost:4040/login")
+        }
     </script>
 </body>
 </html>
