@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registr</title>
+    <style>
+                *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .container{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-repeat: no-repeat;
+            background-position: center center; 
+            background-size: cover;
+        }
+        .form{
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            height: 70vh;
+            padding: 20px;
+            border: 1px solid rgba(107, 106, 106, 0.8);
+            border-radius: 12px;
+            gap: 10px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0px 0px 15px black;
+        }
+        .form h2{
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+        }
+        label{
+            font-size: 22px;
+            color: #fff;
+            font-weight: bold;
+        }
+        input{
+            height: calc(100%/6);    
+            padding: 10px;
+            border: 1px solid rgba(107, 106, 106, 0.8);
+            border-radius: 12px;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #222;
+            background-color: rgba(255, 255, 255, 0.712);
+        }
+        .sign_btn{
+            backdrop-filter: blur(20px);
+            color: #fff;
+            font-weight: bold;
+            margin-top: 10px;
+            background-color:rgba(34, 112, 230, 0.719);
+        }
+        button{
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="form">
+            
+            <h2>Registr page</h2>
+
+            <label for="fullName">Enter Full Name:</label>
+            <input type="text" id="fullName"  name="fullName" minlength="5" placeholder="Enter your full name...">
+            
+            <label for="email">Enter Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email...">
+
+            <label for="password">Enter Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter password">
+
+            <label for="confirmPassword">Enter Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Enter confirm password">
+
+            <input type="submit" value="SIGN UP" class="sign_btn">
+            <button" onclick="Start">SIGN IN</a>
+        </form>
+    </div>
+    <script>
+        const namelement=document.querySelector("#fullName")
+        const emailelement=document.querySelector("#email")
+        const passwordelement=document.querySelector("#password")
+        const confirmpasswordelement=document.querySelector("#confirmPassword")
+        const formelement=document.querySelector("form")
+        const buttonelement=document.querySelector("sign_btn")
+        formelement.addEventListener("submit",async(e)=>{
+            e.preventDefault()
+            const name=namelement.value
+            const email=emailelement.value
+            const password=passwordelement.value
+            const confirmpassword=confirmpasswordelement.value
+            const data={
+                name,
+                email,
+                password
+            }
+            if(password!=confirmpassword){
+                alert("Error")
+                return
+            }
+            try {
+            const result=await fetch("http://localhost:4040/auth/register",{
+                method:"POST",
+                headers: {
+                "Content-type": "application/json",
+                },
+                body:JSON.stringify(data)
+            })
+            const resdata=await result.json()
+            console.log(resdata)
+            if(resdata.message=="yaratildi"){
+                window.open("http://localhost:4040/login")
+            }else if (resdata.message!="yaratildi"){
+                alert("Kamchilik bor")
+            }
+            }catch (error) {
+                alert(error.message)
+            }
+
+        })
+    </script>
+</body>
+</html>
