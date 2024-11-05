@@ -15,7 +15,6 @@ export const registercontroller=async(req,res)=>{
 export const logincontroller=async(req,res)=>{
     try {
         const {email,password}=req.body
-        console.log({email,password})
         const find=await User.find({email:email,password:password})
         if(find.length==1){
             res.status(200).send({message:"kirildi",data:find})
