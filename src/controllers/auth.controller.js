@@ -9,7 +9,7 @@ export const registercontroller=async(req,res)=>{
         name,email,password
         })
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).send("Ro'yxatdan o'tishda kamchilik bor")
     }
 }
 export const logincontroller=async(req,res)=>{
